@@ -1,16 +1,28 @@
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import InvoicePage from "./pages/InvoicePage";
+import HeaderComponent from "./components/HeaderComponent";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import AddCashier from "./pages/AddCashier";
+import AddSignature from "./pages/AddSignature";
 
 function App() {
   const contentRef = useRef();
   const reactToPrintFn = useReactToPrint({ contentRef });
 
   return (
-    <Routes>
-      <Route path="/" element={<InvoicePage />} />
-    </Routes>
+    <BrowserRouter>
+      <HeaderComponent />
+      <Routes>
+        <Route path="/" element={<InvoicePage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/add-user-details" element={<AddCashier />} />
+        <Route path="/add-user-signature" element={<AddSignature />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

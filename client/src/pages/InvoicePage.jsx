@@ -35,7 +35,7 @@ function InvoicePage() {
   const [total, setTotal] = useState(0);
 
   return (
-    <main className="w-full p-4 max-w-5xl mx-auto mt-10 bg-white rounded shadow mb-20">
+    <main className="w-full p-4 max-w-5xl mx-auto mt-5 bg-white rounded shadow mb-20">
       <InvoiceHeader handlePrint={handlePrint} />
 
       {/* content of invoice to print */}
