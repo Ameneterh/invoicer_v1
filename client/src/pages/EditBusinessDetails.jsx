@@ -14,7 +14,7 @@ const rules = [
   },
 ];
 
-export default function Register() {
+export default function EditBusinessDetails() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -84,7 +84,7 @@ export default function Register() {
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            label="Login Password"
             name="business_password"
             className="flex-1"
             rules={rules}
@@ -116,14 +116,69 @@ export default function Register() {
           </Form.Item>
         </div>
 
+        {/* details of handling staff */}
+        <Divider />
+
+        <h1 className="text-2xl text-red-900 mt-4 mb-3">Details of Handler</h1>
+        <div className="flex md:gap-5 w-full flex-col md:flex-row">
+          <Form.Item
+            label="Name of Staff"
+            name="staff_name"
+            className="flex-1"
+            rules={rules}
+          >
+            <Input type="text" className=" -mt-[6px]" />
+          </Form.Item>
+        </div>
+        <div className="flex md:gap-5 w-full flex-col md:flex-row">
+          <Form.Item
+            label="Phone Number"
+            name="staff_phone"
+            className="flex-1"
+            rules={rules}
+          >
+            <Input type="text" className=" -mt-[6px]" />
+          </Form.Item>
+          <Form.Item
+            label="Email"
+            name="staff_email"
+            className="flex-1"
+            rules={rules}
+          >
+            <Input type="email" className=" -mt-[6px]" />
+          </Form.Item>
+        </div>
+
+        {/* details of handling staff */}
+        <Divider />
+
+        <h1 className="text-2xl text-red-900 mt-4 mb-3">
+          Company Logo & Authorised Signature
+        </h1>
+        <div className="flex md:gap-5 w-full flex-col md:flex-row">
+          <Form.Item
+            label="Name of Staff"
+            name="staff_name"
+            className="flex-1"
+            rules={rules}
+          >
+            <Input type="text" className=" -mt-[6px]" />
+          </Form.Item>
+          <Form.Item
+            label="License Number"
+            name="superintendent_license"
+            className="flex-1"
+            rules={rules}
+          >
+            <Input type="text" className=" -mt-[6px]" />
+          </Form.Item>
+        </div>
+
         {/* agreement with terms and conditions */}
-        <div className="p-3 w-full bg-sky-50 text-sm text-center">
+        <div className="p-3 w-full bg-sky-50">
           <p>
-            By clicking on <b>Register</b>, you indicate your agreement with all
-            our{" "}
-            <Link to={"/t&c"} className="block">
-              Terms and Conditions
-            </Link>
+            By clicking on signup, you indicate your agreement with all our{" "}
+            <Link to={"/t&c"}>Terms and Conditions</Link>
           </p>
         </div>
 
@@ -134,7 +189,7 @@ export default function Register() {
                 <span className="pl-3">Loading ...</span>
               </>
             ) : ( */}
-          Register Business
+          Sign Up
           {/* )} */}
         </Button>
       </Form>
