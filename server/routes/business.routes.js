@@ -2,6 +2,7 @@ import express from "express";
 import Business from "../models/business.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import authMiddleware from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ const router = express.Router();
 router.post("/register", async (req, res) => {
   try {
     // check if business exists
-    const business = await Business.find({ email: req.body.busness_email });
+    const business = await Business.findOne({ email: req.body.business_email });
     if (business) {
       throw new Error(
         "Business already exists! Please, Register Another Business"
@@ -39,15 +40,27 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     // check if business exists
-    const business = await Business.findOne({ email: req.body.business_email });
+    const business = await Business.findOne({
+      business_email: req.body.business_email,
+    });
     if (!business) {
-      throw new Error("Business not found!");
+      throw new Error("This account not in Database!");
+    }
+
+    // check if business account is blocked
+    if (business.status !== "active" && business.status !== "pending") {
+      throw new Error("This account is blocked, please contact Admin!");
+    }
+
+    // check if business account is inactive
+    if (business.status === "pending") {
+      throw new Error("This account is not yet approved! Please contact Admin");
     }
 
     // verify password
     const validPassword = bcrypt.compareSync(
       req.body.business_password,
-      business.password
+      business.business_password
     );
 
     if (!validPassword) {
@@ -60,7 +73,25 @@ router.post("/login", async (req, res) => {
     // if all okay, send response
     res.send({
       success: true,
-      message: "Business Successfully Logged in",
+      message: "Login Successful!",
+      data: token,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+// get current business
+router.get("/get-logged-business", authMiddleware, async (req, res) => {
+  try {
+    const business = await Business.findById(req.body.businessId);
+    res.send({
+      success: true,
+      message: "Business fetched successfully!",
+      data: business,
     });
   } catch (error) {
     res.send({
@@ -71,5 +102,19 @@ router.post("/login", async (req, res) => {
 });
 
 // edit business details
+router.put("/edit-business/:id", authMiddleware, async (req, res) => {
+  try {
+    await Business.findByIdAndUpdate(req.params.id, req.body);
+    res.send({
+      success: true,
+      message: "Business profile updated successfully!",
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
 
 export default router;

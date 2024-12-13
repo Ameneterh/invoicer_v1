@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaSignOutAlt, FaSignInAlt, FaEyeSlash, FaEye } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
 import Divider from "../components/Divider";
-// import { LoginUser } from "../apiCalls/users.js";
+import { LoginBusiness } from "../apiCalls/business";
 // import { useDispatch } from "react-redux";
 // import { setLoader } from "../redux/loaderSlice.js";
 
@@ -17,25 +17,26 @@ const rules = [
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const dispatch = useDispatch();
 
   const handleSubmit = async (values) => {
-    // try {
-    //   dispatch(setLoader(true));
-    //   const response = await LoginUser(values);
-    //   dispatch(setLoader(false));
-    //   if (response.success) {
-    //     message.success(response.message);
-    //     localStorage.setItem("token", response.data);
-    //     window.location.href = "/admin";
-    //   } else {
-    //     throw new Error(response.message);
-    //   }
-    // } catch (error) {
-    //   dispatch(setLoader(false));
-    //   message.error(error.message);
-    // }
+    console.log(values);
+    try {
+      //   dispatch(setLoader(true));
+      const response = await LoginBusiness(values);
+      //   dispatch(setLoader(false));
+      if (response.success) {
+        message.success(response.message);
+        localStorage.setItem("token", response.data);
+        window.location.href = "/";
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      //   dispatch(setLoader(false));
+      message.error(error.message);
+    }
   };
 
   useEffect(() => {
@@ -55,7 +56,11 @@ export default function Login() {
         {/* username & email input */}
         <div className="flex flex-col sm:flex-row gap-3 w-full">
           <div className="w-full">
-            <Form.Item label="Staff Email" name="email" rules={rules}>
+            <Form.Item
+              label="Business Email"
+              name="business_email"
+              rules={rules}
+            >
               <Input
                 type="email"
                 placeholder="Enter your valid email"
@@ -68,7 +73,7 @@ export default function Login() {
         {/* password input */}
         <div className="flex flex-col sm:flex-row gap-3 w-full">
           <div className="w-full">
-            <Form.Item label="Password" name="password" rules={rules}>
+            <Form.Item label="Password" name="business_password" rules={rules}>
               <div className="flex items-center w-full relative -mt-[6px]">
                 <Input
                   type={showPassword ? "text" : "password"}
@@ -86,14 +91,7 @@ export default function Login() {
         </div>
 
         <Button type="primary" htmlType="submit" block className="mt-4 h-10">
-          {/* {loading ? (
-              <>
-                <Spinner size="sm" />
-                <span className="pl-3">Loading ...</span>
-              </>
-            ) : ( */}
-          Sign In
-          {/* )} */}
+          Login
         </Button>
       </Form>
 

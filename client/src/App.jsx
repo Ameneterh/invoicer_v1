@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AddCashier from "./pages/AddCashier";
 import AddSignature from "./pages/AddSignature";
+import ProtectedPage from "./components/ProtectedPage";
 
 function App() {
   const contentRef = useRef();
@@ -16,7 +17,14 @@ function App() {
     <BrowserRouter>
       <HeaderComponent />
       <Routes>
-        <Route path="/" element={<InvoicePage />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedPage>
+              <InvoicePage />
+            </ProtectedPage>
+          }
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/add-user-details" element={<AddCashier />} />
         <Route path="/add-user-signature" element={<AddSignature />} />

@@ -4,26 +4,27 @@ const businessSchema = new mongoose.Schema(
   {
     business_name: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
     },
     business_email: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
+      trim: true,
     },
     business_phone: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
     },
     business_password: {
       type: String,
-      require: true,
+      required: true,
     },
     business_address: {
       type: String,
-      require: true,
+      required: true,
     },
     business_logo: {
       type: String,

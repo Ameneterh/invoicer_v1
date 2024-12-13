@@ -6,6 +6,7 @@ import { Form, Input, Button, Upload, message } from "antd";
 import Divider from "../components/Divider.jsx";
 import TextArea from "antd/es/input/TextArea";
 import { useDispatch, useSelector } from "react-redux";
+import { RegisterBusiness } from "../apiCalls/business.js";
 
 const rules = [
   {
@@ -20,28 +21,27 @@ export default function Register() {
   const dispatch = useDispatch();
 
   const handleSubmit = async (values) => {
-    navigate("/add-user-details");
-    // try {
-    //   dispatch(setLoader(true));
-    //   const response = await AddPremise(values);
-    //   dispatch(setLoader(false));
-    //   if (response.success) {
-    //     message.success(response.message);
-    //     navigate("/sign-in");
-    //   } else {
-    //     throw new Error(response.message);
-    //   }
-    // } catch (error) {
-    //   dispatch(setLoader(false));
-    //   message.error(error.message);
-    // }
+    try {
+      //   dispatch(setLoader(true));
+      const response = await RegisterBusiness(values);
+      //   dispatch(setLoader(false));
+      if (response.success) {
+        message.success(response.message);
+        navigate("/add-user-details");
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      //   dispatch(setLoader(false));
+      message.error(error.message);
+    }
   };
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("token")) {
-  //     navigate("/");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div className="w-full p-4 max-w-xl mx-auto mt-5 bg-white rounded shadow mb-20">
