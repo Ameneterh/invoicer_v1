@@ -11,8 +11,8 @@ createRoot(document.getElementById("root")).render(
       theme={{
         components: {
           Button: {
-            colorPrimary: "#003060",
-            colorPrimaryHover: "#055c9d",
+            colorPrimary: "#145da0",
+            colorPrimaryHover: "#0E86D4",
             borderRadius: "5px",
             height: "45px",
           },

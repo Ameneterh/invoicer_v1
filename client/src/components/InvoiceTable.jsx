@@ -8,18 +8,18 @@ export default function InvoiceTable({ list, total }) {
       <table width="100%">
         <thead>
           <tr className="bg-gray-100 h-10">
-            <td className="font-bold">S/N</td>
-            <td className="font-bold">Item Description</td>
-            <td className="font-bold">Qty</td>
-            <td className="font-bold">Rate</td>
-            <td className="font-bold">Amount</td>
+            <td className="font-bold text-center">S/N</td>
+            <td className="font-bold text-center">Item/Job Description</td>
+            <td className="font-bold text-center">Qty</td>
+            <td className="font-bold text-center">Rate</td>
+            <td className="font-bold text-center">Amount</td>
           </tr>
         </thead>
         {list.map(
           ({ id, jobTitle, jobDescription, quantity, rate, amount }, index) => (
             <React.Fragment key={id}>
               <tbody>
-                <tr className="border-b">
+                <tr className="border-b  text-sm">
                   <td>{index + 1}</td>
                   <td>
                     <p className="font-bold">
@@ -45,8 +45,10 @@ export default function InvoiceTable({ list, total }) {
       </table>
       <div className="mt-5 rounded flex items-start gap-4 w-full">
         <div className=" p-2 bg-gray-50 flex items-start gap-4 md:w-3/4 min-h-[72px]">
-          <h2 className="font-bold">Amount in Words:</h2>
-          <p className="capitalize">{toWords(Number(total))} Naira only</p>
+          <h2 className="font-bold text-sm">Amount in Words:</h2>
+          <p className="capitalize text-sm">
+            {toWords(Number(total))} Naira only
+          </p>
         </div>
         <p className="flex flex-col items-center gap-1 font-bold p-2 border rounded">
           <span>Grand Total:</span>

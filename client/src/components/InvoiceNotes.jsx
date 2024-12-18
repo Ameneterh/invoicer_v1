@@ -1,17 +1,22 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function InvoiceNotes() {
+  const { business } = useSelector((state) => state.businesses);
+
   return (
     <section className="mb-5 flex flex-col sm:flex-row justify-between p-4 bg-slate-100 rounded max-w-96">
       <ul className="flex-1">
         <li>
-          Bank Name: <span className="font-bold">Guaranty Trust Bank</span>
+          Bank Name: <span className="font-bold">{business.banker}</span>
         </li>
         <li>
-          Account Name: <span className="font-bold">Abanyi Blessing Erdoo</span>
+          Account Name:{" "}
+          <span className="font-bold">{business.account_name}</span>
         </li>
         <li>
-          Account Number: <span className="font-bold">0022010398</span>
+          Account Number:{" "}
+          <span className="font-bold">{business.account_number}</span>
         </li>
       </ul>
 

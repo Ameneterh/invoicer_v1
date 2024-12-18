@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { MdOutlineDelete, MdEditDocument } from "react-icons/md";
+import { MdOutlineDelete } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
+import { Button } from "antd";
 
 export default function TableForm({
   jobTitle,
@@ -88,33 +90,38 @@ export default function TableForm({
   };
 
   return (
-    <div className="mt-5 mb-10">
-      <h1 className="mb-5 text-xl font-bold">Enter Job Details</h1>
+    <div className="px-4 mt-5 mb-10">
+      <div className="flex items-center w-full gap-3 mb-5">
+        <h1 className="text-xl font-bold">Enter Job Details</h1>
+        <p className="flex-1 h-[1px] bg-gray-600"></p>
+      </div>
 
       <form onSubmit={handleSubmit}>
         <div className="md:grid grid-cols-2 gap-10">
           <div className="flex flex-col">
-            <label htmlFor="job_title" className="font-bold">
-              Job Title
+            <label htmlFor="job_title" className="text-sm mb-1">
+              Item/Job Title
             </label>
             <input
               type="text"
               name="job_title"
               id="job_title"
-              placeholder="Job Title"
+              placeholder="Item/Job Title"
+              className="p-2"
               value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="job_description" className="font-bold">
-              Job Description
+            <label htmlFor="job_description" className="text-sm mb-1">
+              Item/Job Description
             </label>
             <input
               type="text"
               name="job_description"
               id="job_description"
-              placeholder="Job Description"
+              placeholder="Item/Job Description"
+              className="p-2"
               value={jobDescription}
               onChange={(e) => setJobDescription(e.target.value)}
             />
@@ -123,7 +130,7 @@ export default function TableForm({
 
         <div className="md:grid grid-cols-3 gap-10 mt-6">
           <div className="flex flex-col">
-            <label htmlFor="quantity" className="font-bold">
+            <label htmlFor="quantity" className="text-sm mb-1">
               Quantity
             </label>
             <input
@@ -131,12 +138,13 @@ export default function TableForm({
               name="quantity"
               id="quantity"
               placeholder="Quantity"
+              className="p-2"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="rate" className="font-bold">
+            <label htmlFor="rate" className="text-sm mb-1">
               Rate
             </label>
             <input
@@ -144,12 +152,13 @@ export default function TableForm({
               name="rate"
               id="rate"
               placeholder="Rate"
+              className="p-2"
               value={rate}
               onChange={(e) => setRate(e.target.value)}
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="amount" className="font-bold">
+            <label htmlFor="amount" className="text-sm mb-1">
               Amount
             </label>
             <p className="font-bold flex flex-1 items-center bg-[#f1f1f1] px-3 py-4 md:py-0 rounded">
@@ -163,24 +172,24 @@ export default function TableForm({
 
         <button
           type="submit"
-          className="bg-blue-600 text-white font-bold py-2 px-8 rounded shadow border-2 border-blue-600 hover:bg-transparent hover:text-blue-600 transition-all duration-300 mt-6 mb-10"
+          className="bg-blue-600 text-white font-bold py-2 px-8 rounded hover:bg-blue-100 hover:text-blue-600 transition-all duration-300 mt-6 mb-10 border-none"
         >
           {isEditing ? "Add Edited Item" : "Add New Invoice Item"}
         </button>
       </form>
 
       {/* show table items */}
-      <div className="flex flex-col gap-y-3 p-5 border-2 rounded">
-        <h1 className="mb-1 text-xl font-bold">Added Items</h1>
+      <div className="flex flex-col gap-y-3 border-2 rounded">
+        <h1 className="mb-1 text-xl font-bold">Added Item/Job</h1>
         <table width="100%">
           <thead>
-            <tr className="bg-gray-100 h-10">
-              <td className="font-bold">S/N</td>
-              <td className="font-bold">Item Description</td>
-              <td className="font-bold">Qty</td>
-              <td className="font-bold">Rate</td>
-              <td className="font-bold">Amount</td>
-              <td className="font-bold">Actions</td>
+            <tr className="bg-gray-50 h-10 border-none">
+              <td className="font-bold text-center">S/N</td>
+              <td className="font-bold text-center">Item/Job Description</td>
+              <td className="font-bold text-center">Qty</td>
+              <td className="font-bold text-center">Rate</td>
+              <td className="font-bold text-center">Amount</td>
+              <td className="font-bold text-center">Actions</td>
             </tr>
           </thead>
           {list.map(
@@ -204,12 +213,12 @@ export default function TableForm({
                     <td>{rate}</td>
                     <td className="amount">{amount}</td>
                     <td className="">
-                      <button onClick={() => deleteItem(id)}>
+                      <span onClick={() => deleteItem(id)}>
                         <MdOutlineDelete className="text-2xl text-red-600 hover:scale-150 transition-all duration-300" />
-                      </button>
-                      <button onClick={() => editItem(id)}>
-                        <MdEditDocument className="text-2xl text-green-600 hover:scale-150 transition-all duration-300 ml-6" />
-                      </button>
+                      </span>
+                      <span onClick={() => editItem(id)}>
+                        <CiEdit className="text-2xl text-green-600 hover:scale-150 transition-all duration-300 ml-6" />
+                      </span>
                     </td>
                   </tr>
                 </tbody>

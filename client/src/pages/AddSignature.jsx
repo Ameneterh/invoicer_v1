@@ -8,17 +8,12 @@ import { Button, message, Upload } from "antd";
 // import { EditProduct, UploadProductImage } from "../apiCalls/products";
 import { MdOutlineDeleteForever } from "react-icons/md";
 
-export default function AddSignature({
-  selectedProduct,
-  setShowProductForm,
-  getData,
-}) {
-  selectedProduct = { image: [] };
-  const [showPassword, setShowPassword] = useState(false);
+export default function AddSignature() {
+  const { business } = useSelector((state) => state.businesses);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [images = [], setImages] = useState(selectedProduct.images);
+  const [images, setImages] = useState(business.staff_signature);
   const [showPreview, setShowPreview] = useState(true);
   const [file, setFile] = useState(null);
 
@@ -71,27 +66,28 @@ export default function AddSignature({
       <div className="py-2 border-b-2 w-full">
         <h1 className="flex items-center gap-2 text-2xl font-bold mb-3">
           <LuClipboardSignature className="text-xl" />
-          Register Your Business/3
+          Add User Staff Handler Signature
         </h1>
         <Divider />
       </div>
       <h1 className="text-2xl text-red-900 mb-3">Upload Staff Signature</h1>
 
       <div className="flex gap-5 mb-5">
-        {images.map((image) => {
-          return (
-            <div className="flex gap-2 border border-solid border-gray-500 rounded-md p-3 items-end relative">
-              <img src={image} alt="" className="h-20 w-20 object-cover" />
+        <div className="flex gap-2 border border-solid border-gray-500 rounded-md p-3 items-end relative">
+          <img
+            src={business.staff_signature}
+            alt=""
+            className="h-20 w-20 object-cover"
+          />
 
-              <MdOutlineDeleteForever
-                className="cursor-pointer text-2xl text-red-600 hover:scale-110 transition-all duration-300 absolute right-0 bottom-1"
-                onClick={() => {
-                  deleteProductImage(image);
-                }}
-              />
-            </div>
-          );
-        })}
+          <MdOutlineDeleteForever
+            className="cursor-pointer text-2xl text-red-600 hover:scale-110 transition-all duration-300 absolute right-0 bottom-1"
+            onClick={() => {
+              deleteProductImage(business.staff_signature);
+            }}
+          />
+        </div>
+        ;
       </div>
       <Upload
         listType="picture"

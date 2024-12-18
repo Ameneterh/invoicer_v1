@@ -37,3 +37,16 @@ export const GetLoggedBusiness = async () => {
     return error.message;
   }
 };
+
+// edit loggedin business
+export const EditBusinessDetails = async (id, payload) => {
+  try {
+    const response = await axiosInstance.put(
+      `/server/business/edit-business-details/${id}`,
+      payload
+    );
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};

@@ -102,7 +102,7 @@ router.get("/get-logged-business", authMiddleware, async (req, res) => {
 });
 
 // edit business details
-router.put("/edit-business/:id", authMiddleware, async (req, res) => {
+router.put("/edit-business-details/:id", authMiddleware, async (req, res) => {
   try {
     await Business.findByIdAndUpdate(req.params.id, req.body);
     res.send({

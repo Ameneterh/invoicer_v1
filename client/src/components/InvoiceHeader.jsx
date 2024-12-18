@@ -1,29 +1,40 @@
+import { Button } from "antd";
 import React from "react";
+import { RiArrowGoBackLine } from "react-icons/ri";
+import { MdOutlineSaveAs } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 export default function InvoiceHeader({ handlePrint }) {
+  const navigate = useNavigate();
+
   return (
     <header className="flex flex-col md:flex-row items-center justify-between mb-5 pb-2 border-b">
       <div>
-        <h2 className="font-bold uppercase tracking-wide text-4xl mb-3">
-          Invoicer
-        </h2>
+        <Button
+          className="flex items-center"
+          onClick={() => window.location.reload()}
+        >
+          <RiArrowGoBackLine />
+          Home
+        </Button>
       </div>
 
       <div>
         <ul className="flex items-center justify-between flex-wrap gap-x-4">
           <li>
-            <button
-              className="text-xl bg-blue-600 text-white hover:bg-opacity-70 px-8 py-2 rounded-lg"
+            <Button
+              className="bg-blue-600 text-white hover:bg-opacity-70 px-8 py-2 rounded flex items-center gap-2"
               onClick={handlePrint}
             >
-              Print/Download
-            </button>
+              <MdOutlineSaveAs className="text-xl" />
+              Save Invoice
+            </Button>
           </li>
-          <li>
-            <button className="text-xl bg-green-600 hover:bg-opacity-70 text-white px-5 py-2 rounded-lg border">
+          {/* <li>
+            <Button className="bg-green-600 hover:bg-opacity-70 text-white px-5 py-2 rounded">
               Send
-            </button>
-          </li>
+            </Button>
+          </li> */}
         </ul>
       </div>
     </header>

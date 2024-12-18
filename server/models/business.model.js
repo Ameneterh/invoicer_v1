@@ -26,10 +26,19 @@ const businessSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    banker: {
+      type: String,
+    },
+    account_name: {
+      type: String,
+    },
+    account_number: {
+      type: String,
+    },
     business_logo: {
       type: String,
       default:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX_h1zNFEyNEJ7ESboE7v_VeFznMtxQ2Pp0w&s",
+        "https://img.freepik.com/premium-vector/black-white-handshake-symbol-with-starburst-background_1294240-23568.jpg?semt=ais_hybrid",
     },
 
     staff_name: {
@@ -41,10 +50,13 @@ const businessSchema = new mongoose.Schema(
     staff_email: {
       type: String,
     },
+    staff_designation: {
+      type: String,
+    },
     staff_signature: {
       type: String,
       default:
-        "https://e7.pngegg.com/pngimages/799/436/png-clipart-signature-logo-encapsulated-postscript-signature-miscellaneous-text.png",
+        "https://www.shutterstock.com/image-vector/signature-vector-hand-drawn-autograph-600nw-2387543207.jpg",
     },
     role: {
       type: String,
@@ -52,7 +64,7 @@ const businessSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: "pending",
+      default: "active",
     },
   },
   { timestamps: true }
